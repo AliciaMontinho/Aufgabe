@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@400;700&display=swap");
+body {
+  background-color: #f8f9fa;
+}
+
+h1,
+h2,
+h3 {
+  color: #0d6efd;
+}
+
+.table {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+}
+
+/* aquí mis estilos */
+
+/* header-login.php */
+.navbar-login {
+  background-color: #0d6efd !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  height: 130px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.logo_login{
+  height: 120;
+}
+.navbar-login .menu-icon {
+  width: 40px;
+  height: 40px;
+  color: white;
+  cursor: pointer;
+}
+.navbar-brand img {
+  width: auto;
+  height: 100px;
+}
+
+/*Menú desplegable de header_login.php*/
+.navbar-login .dropdown-menu {
+  background-color: #f1f1f1 !important; /* gris claro */
+  border-radius: 20px !important;
+  border: none;
+  padding: 10px 0;
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-login .dropdown-item {
+  padding: 10px 20px;
+  color: #333;
+}
+
+.navbar-login .dropdown-item:hover {
+  background-color: #e6e6e6;
+  color: #0d6efd;
+  border-radius: 20px;
+}
+
+.card {
+  border-radius: 20px;
+}
+
+/*header.php */
+.navbar {
+    background-color: #0d6efd !important;
+}
+
+.logo_general{
+  height: 120px;
+}
+.dropdown-menu {
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.dropdown-header {
+    font-size: 16px;
+}
+
+.dropdown-item {
+    border-radius: 8px;
+}
+
+.dropdown-item:hover {
+    background-color: #eef4ff;
+}
+
+

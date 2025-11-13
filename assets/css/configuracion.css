@@ -1,0 +1,28 @@
+.configuracion-container {
+    max-width: 900px;
+}
+.titulo-configuracion{
+    font-family: "Roboto";
+    font-size: 26px;
+    color: grey;
+    font-weight: bold;
+}
+.card {
+    border-radius: 15px;
+}
+
+.card h5 {
+    color: #0d6efd;
+}
+
+.boton {
+    border-radius: 10px;
+    background-color: #0d6efd;
+    border: 0px;
+    color: #ffffff;
+    font-weight: 400;
+    font-family: "Roboto";
+    font-size: 14px;
+    padding: 10px;
+}
+

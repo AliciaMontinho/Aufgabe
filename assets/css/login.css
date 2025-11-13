@@ -1,0 +1,53 @@
+.contenedor{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 700px !important;
+}
+
+
+.card-login {
+  width: 100%;
+  max-width: 550px; /* tamaño más grande */
+  border-radius: 25px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-login h3 {
+  font-size: 32px;
+  font-family: "Roboto", sans-serif;
+  color: #0d6efd;
+}
+
+.card-login .form-label {
+  font-size: 18px;
+  color: #333;
+  font-family: "Poppins", sans-serif;
+}
+
+.card-login .form-control {
+  padding: 14px 18px;
+  font-size: 17px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.card-login .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+}
+
+.card-login .btn-primary {
+  background-color: #0d6efd;
+  border: none;
+  padding: 14px;
+  font-size: 18px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.card-login .btn-primary:hover {
+  background-color: #0b5ed7;
+  transform: scale(1.02);
+}
