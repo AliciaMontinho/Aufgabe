@@ -24,7 +24,7 @@ CREATE TABLE casas (
 
 CREATE TABLE habitaciones (
     id_habitacion INT AUTO_INCREMENT PRIMARY KEY,
-    numero VARCHAR(20) NOT NULL,
+    numero VARCHAR(100) NOT NULL,
     id_casa INT NOT NULL,
     descripcion VARCHAR(255),
     FOREIGN KEY (id_casa) REFERENCES casas(id_casa)
@@ -77,6 +77,11 @@ INSERT INTO usuarios (nombre, apellido, email, password, rol) VALUES
 ('Artur', 'Montinho','martinsart@gmail.com', '1234', 'técnico');
 
 INSERT INTO habitaciones (numero, id_casa, descripcion) VALUES
+('Sala de enfermeros', 1, 'Sala equipada para el personal de enfermería'),
+('Ascensor principal', 1, 'Ascensor de acceso principal para pacientes y visitantes'),
+('Sala de espera', 1, 'Área de espera cómoda para pacientes y familiares'),
+('Ascensor de servicio', 1, 'Ascensor destinado para el transporte de equipos y suministros'),
+('Sala de reuniones', 1, 'Espacio para reuniones del personal médico y administrativo'),
 ('101', 1, 'Habitación individual estándar'),
 ('102', 1, 'Habitación doble con vista al jardín'),
 ('103', 1, 'Habitación doble estándar'),
@@ -98,6 +103,11 @@ INSERT INTO habitaciones (numero, id_casa, descripcion) VALUES
 ('119', 1, 'Habitación doble con climatización especial'),
 ('120', 1, 'Habitación individual con espacio para silla de ruedas'),
 
+('Ascensor principal', 2, 'Ascensor de acceso principal para pacientes y visitantes'),
+('Sala de espera', 2, 'Área de espera cómoda para pacientes y familiares'),
+('Sala de enfermeros', 2, 'Sala equipada para el personal de enfermería'),
+('Ascensor de servicio', 2, 'Ascensor destinado para el transporte de equipos y suministros'),
+('Sala de reuniones', 2, 'Espacio para reuniones del personal médico y administrativo'),
 ('201', 2, 'Habitación individual de rehabilitación'),
 ('202', 2, 'Habitación de fisioterapia'),
 ('203', 2, 'Habitación individual para terapia ocupacional'),
@@ -117,7 +127,13 @@ INSERT INTO habitaciones (numero, id_casa, descripcion) VALUES
 ('217', 2, 'Habitación doble para movilidad reducida'),
 ('218', 2, 'Habitación de ejercicios musculares guiados'),
 ('219', 2, 'Habitación individual equipada con barras de apoyo'),
+('220', 2, 'Habitación para dos pacientes en rehabilitación'),
 
+('Ascensor principal', 3, 'Ascensor de acceso principal para pacientes y visitantes'),
+('Sala de espera', 3, 'Área de espera cómoda para pacientes y familiares'),
+('Sala de enfermeros', 3, 'Sala equipada para el personal de enfermería'),
+('Ascensor de servicio', 3, 'Ascensor destinado para el transporte de equipos y suministros'),
+('Sala de reuniones', 3, 'Espacio para reuniones del personal médico y administrativo'),
 ('301', 3, 'Habitación psiquiátrica segura'),
 ('302', 3, 'Habitación de observación psiquiátrica'),
 ('303', 3, 'Habitación de monitoreo constante'),
