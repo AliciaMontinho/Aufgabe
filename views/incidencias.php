@@ -1,7 +1,25 @@
-<!-- Codificado pero no todavía en funcionamiento -->
-<?php include_once '../includes/header.php'; ?>
-<link rel="stylesheet" href="../assets/css/incidencias.css">
+<?php
+include_once '../includes/header.php';
+require_once '../config/Database.php';
 
+$database = new Database();
+$db = $database->conectar();
+
+$sql = "
+    SELECT i.id_incidencia, i.titulo, i.relevancia, i.estado, i.fecha_inicio,
+           h.numero AS habitacion_numero,
+           c.nombre AS casa_nombre
+    FROM incidencias i
+    LEFT JOIN habitaciones h ON i.id_habitacion = h.id_habitacion
+    LEFT JOIN casas c ON h.id_casa = c.id_casa
+    ORDER BY i.fecha_inicio DESC
+";
+$stmt = $db->prepare($sql);
+$stmt->execute();
+$incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<link rel="stylesheet" href="../assets/css/incidencias.css">
 
 <div class="container incidencias-container py-4">
 
@@ -10,17 +28,16 @@
             <i class="bi bi-exclamation-octagon-fill me-2"></i> Incidencias
         </h2>
         <a href="nueva_incidencia.php" class="btn btn-nueva-incidencia">
-            <i class="bi bi-plus-circle me-1"></i>Nueva incidencia
+            <i class="bi bi-plus-circle me-1"></i> Nueva incidencia
         </a>
     </div>
 
-    <!-- FILTROS -->
     <div class="card shadow-sm p-3 mb-4 filtro-incidencias">
-        <form class="row g-3">
+        <form class="row g-3" method="GET" action="">
 
             <div class="col-md-3">
                 <label class="form-label fw-semibold">Casa</label>
-                <select class="form-select">
+                <select name="casa" class="form-select">
                     <option value="">Todas</option>
                     <option value="1">Kronenhof</option>
                     <option value="2">Seefeld</option>
@@ -30,7 +47,7 @@
 
             <div class="col-md-3">
                 <label class="form-label fw-semibold">Estado</label>
-                <select class="form-select">
+                <select name="estado" class="form-select">
                     <option value="">Todos</option>
                     <option value="no_atendido">No atendido</option>
                     <option value="en_proceso">En proceso</option>
@@ -40,7 +57,7 @@
 
             <div class="col-md-3">
                 <label class="form-label fw-semibold">Relevancia</label>
-                <select class="form-select">
+                <select name="relevancia" class="form-select">
                     <option value="">Todas</option>
                     <option value="alto">Alta</option>
                     <option value="medio">Media</option>
@@ -49,7 +66,7 @@
             </div>
 
             <div class="col-md-3 d-flex align-items-end">
-                <button class="btn btn-outline-primary w-100">
+                <button type="submit" class="btn btn-outline-primary w-100">
                     <i class="bi bi-funnel-fill me-1"></i> Filtrar
                 </button>
             </div>
@@ -57,7 +74,6 @@
         </form>
     </div>
 
-    <!-- LISTADO -->
     <div class="table-responsive">
         <table class="table table-hover tabla-incidencias align-middle shadow-sm">
             <thead class="table-primary">
@@ -74,47 +90,64 @@
             </thead>
 
             <tbody>
-                <!-- EJEMPLO — Cuando conectes backend esto se generará dinámico -->
-                <tr>
-                    <td>1</td>
-                    <td>Cama eléctrica no sube</td>
-                    <td>Seefeld</td>
-                    <td>201</td>
-                    <td><span class="badge bg-danger">Alta</span></td>
-                    <td><span class="badge bg-warning text-dark">En proceso</span></td>
-                    <td>2025-01-12</td>
-                    <td class="text-center">
-                        <a href="detalle_incidencia.php?id=1" class="btn btn-sm btn-info text-white me-1">
-                            <i class="bi bi-eye"></i>
-                        </a>
-                        <a href="editar_incidencia.php?id=1" class="btn btn-sm btn-warning text-white">
-                            <i class="bi bi-pencil"></i>
-                        </a>
-                    </td>
-                </tr>
+                <?php if (empty($incidencias)): ?>
+                    <tr>
+                        <td colspan="8" class="text-center text-muted py-4">
+                            No hay incidencias registradas.
+                        </td>
+                    </tr>
+                <?php else: ?>
+                    <?php foreach ($incidencias as $i): ?>
+                        <tr>
+                            <td><?= $i['id_incidencia'] ?></td>
+                            <td><?= htmlspecialchars($i['titulo']) ?></td>
+                            <td><?= $i['casa_nombre'] ?? 'Sin casa' ?></td>
+                            <td><?= $i['habitacion_numero'] ?? '—' ?></td>
 
-                <tr>
-                    <td>2</td>
-                    <td>Luz fundida en baño</td>
-                    <td>Kronenhof</td>
-                    <td>101</td>
-                    <td><span class="badge bg-warning text-dark">Media</span></td>
-                    <td><span class="badge bg-secondary">No atendido</span></td>
-                    <td>2025-01-10</td>
-                    <td class="text-center">
-                        <a href="#" class="btn btn-sm btn-info text-white me-1">
-                            <i class="bi bi-eye"></i>
-                        </a>
-                        <a href="#" class="btn btn-sm btn-warning text-white">
-                            <i class="bi bi-pencil"></i>
-                        </a>
-                    </td>
-                </tr>
+                            <td>
+                                <?php
+                                $badgeClass = match ($i['relevancia']) {
+                                    'alto' => 'bg-danger',
+                                    'medio' => 'bg-warning text-dark',
+                                    'bajo' => 'bg-success',
+                                    default => 'bg-secondary'
+                                };
+                                ?>
+                                <span class="badge <?= $badgeClass ?>">
+                                    <?= ucfirst($i['relevancia'] ?? '—') ?>
+                                </span>
+                            </td>
 
+                            <td>
+                                <?php
+                                $estadoClass = match ($i['estado']) {
+                                    'no_atendido' => 'bg-secondary',
+                                    'en_proceso' => 'bg-warning text-dark',
+                                    'completado' => 'bg-success',
+                                    default => 'bg-light text-dark'
+                                };
+                                ?>
+                                <span class="badge <?= $estadoClass ?>">
+                                    <?= str_replace('_', ' ', ucfirst($i['estado'])) ?>
+                                </span>
+                            </td>
+
+                            <td><?= date('Y-m-d', strtotime($i['fecha_inicio'])) ?></td>
+
+                            <td class="text-center">
+                                <a href="detalle_incidencia.php?id=<?= $i['id_incidencia'] ?>" class="btn btn-sm btn-info text-white me-1">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a href="editar_incidencia.php?id=<?= $i['id_incidencia'] ?>" class="btn btn-sm btn-warning text-white">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
-
 </div>
 
 <?php include_once '../includes/footer.php'; ?>

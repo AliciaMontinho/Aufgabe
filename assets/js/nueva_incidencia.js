@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const opt = document.createElement('option');
                 opt.value = h.id_habitacion;
                 //Uso un fallback para asegurarme de que se puede mostrar un valor alternativo si el principal no existe o está vacío
-                opt.textContent = h.etiqueta ?? h.nombre ?? h.numero ?? (`Hab ${h.id_habitacion}`);
+                opt.textContent = h.numero ?? h.nombre ?? h.numero ?? (`Hab ${h.id_habitacion}`);
                 habitacionSelect.appendChild(opt);
             });
         } catch (e) {

@@ -1,0 +1,12 @@
+.card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.2s ease;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+h1, h3 {
+    letter-spacing: 0.5px;
+}
