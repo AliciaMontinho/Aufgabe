@@ -22,6 +22,7 @@ class UsuarioController {
         $_SESSION['usuario_id'] = $usuario['id_usuario'];
         $_SESSION['nombre'] = $usuario['nombre'];
         $_SESSION['rol'] = $usuario['rol'];
+        $_SESSION['email'] = $usuario['email'];
 
         //Guardar datos
         if (!empty($_POST['recuerdame'])) {
