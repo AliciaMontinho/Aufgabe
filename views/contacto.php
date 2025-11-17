@@ -1,3 +1,5 @@
+
+
 <!-- Diseñada pero sin back todavía -->
 <?php include_once '../includes/header_login.php'; ?>
 <link rel="stylesheet" href="../assets/css/contacto.csss">
@@ -35,5 +37,6 @@
     </p>
   </div>
 </div>
+<script src="../assets/js/contacto.js"></script>
 
 <?php include_once '../includes/footer.php'; ?>
