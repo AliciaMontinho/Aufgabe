@@ -9,16 +9,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/header_login.css">
 </head>
 
 <body class="bg-light">
 
-<nav class="navbar navbar-login shadow-sm px-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm3">
     <div class="container-fluid d-flex justify-content-between align-items-center">
         
         <a class="navbar-brand logo_login d-flex align-items-center" href="../views/login.php">
-            <img src="../assets/img/logo_blanco.svg" alt="Logo Aufgabe" 
+            <img src="../assets/img/logo.svg" alt="Logo Aufgabe" 
                  class="img-fluid">
         </a>
 

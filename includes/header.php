@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
 </head>
 
 <body class="bg-light">
@@ -19,7 +19,7 @@
 
 
             <a class="navbar-brand logo_general d-flex align-items-center" href="../views/dashboard.php">
-                <img src="../assets/img/logo_blanco.svg" alt="Logo" class="me-2">
+                <img src="../assets/img/logo.svg" alt="Logo" class="me-2">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
