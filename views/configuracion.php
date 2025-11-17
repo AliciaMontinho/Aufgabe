@@ -1,6 +1,7 @@
 <!-- Todavía no terminada -->
-<?php include_once '../includes/header.php';
-    include_once '../includes/auth.php'
+<?php
+include_once '../includes/header.php';
+include_once '../includes/auth.php'
 ?>
 
 <link rel="stylesheet" href="../assets/css/configuracion.css">

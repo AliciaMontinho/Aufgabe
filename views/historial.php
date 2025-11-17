@@ -1,6 +1,6 @@
-<?php include_once '../../includes/header.php'; ?>
+<?php include_once '../includes/header.php'; ?>
 
-<link rel="stylesheet" href="../../assets/css/historial.css">
+<link rel="stylesheet" href="../assets/css/historial.css">
 
 <div class="container historial-container py-4">
 
@@ -97,4 +97,4 @@
 
 </div>
 
-<?php include_once '../../includes/footer.php'; ?>
+<?php include_once '../includes/footer.php'; ?>

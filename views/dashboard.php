@@ -51,7 +51,7 @@ $totalCasas = $db->query("SELECT COUNT(*) FROM casas ")->fetchColumn();
                         <i class="bi bi-journal-text text-primary" style="font-size:3rem;"></i>
                         <h4 class="mt-3 fw-semibold">Historial</h4>
                         <p class="text-muted">Consulta el registro completo de incidencias.</p>
-                        <a href="historial/historial.php" class="btn btn-primary w-100">Ver historial</a>
+                        <a href="historial.php" class="btn btn-primary w-100">Ver historial</a>
                     </div>
                 </div>
             </div>
