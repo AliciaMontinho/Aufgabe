@@ -30,7 +30,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="../views/dashboard.php">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="../views/incidencias.php">Incidencias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../views/historial/historial.php">Historial</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../views/historial.php">Historial</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">

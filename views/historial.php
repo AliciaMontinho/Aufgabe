@@ -1,18 +1,37 @@
-<?php include_once '../includes/header.php'; ?>
+<?php include_once '../includes/header.php';
+require_once '../config/Database.php';
+require_once '../includes/auth.php';
+$database = new Database();
+$db = $database->conectar();
+
+$sql = "
+    SELECT i.id_incidencia, i.titulo, i.fecha_inicio, i.fecha_fin,
+           i.estado,
+           i.id_tecnico,
+           c.nombre AS casa, 
+           u.nombre AS tecnico
+    FROM incidencias i
+    LEFT JOIN habitaciones h ON i.id_habitacion = h.id_habitacion
+    LEFT JOIN casas c ON h.id_casa = c.id_casa
+    LEFT JOIN usuarios u ON i.id_tecnico = u.id_usuario
+    WHERE i.estado = 'completado'
+    ORDER BY i.fecha_fin DESC
+";
+
+$stmt = $db->prepare($sql);
+$stmt->execute();
+$historial = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 
 <link rel="stylesheet" href="../assets/css/historial.css">
 
 <div class="container historial-container py-4">
-
-    <!-- Título -->
     <div class="text-center mb-4">
         <h2 class="text-primary fw-bold">
             <i class="bi bi-clock-history me-2"></i> Historial de incidencias
         </h2>
         <p class="text-muted">Consulta las incidencias ya finalizadas o que cambiaron de estado.</p>
     </div>
-
-    <!-- FILTROS -->
     <div class="card shadow-sm p-4 filtro-historial mb-4">
 
         <form class="row g-3">
@@ -63,34 +82,39 @@
                 <tr>
                     <th>Incidencia</th>
                     <th>Casa</th>
-                    <th>Estado nuevo</th>
-                    <th>Estado previo</th>
+                    <th>Estado</th>
                     <th>Técnico</th>
-                    <th>Fecha cambio</th>
+                    <th>Fecha inicio</th>
+                    <th>Fecha fin</th>
                 </tr>
             </thead>
 
             <tbody>
-                <!-- Estos casos son solo ejemplos para la visaulización, cuando haga la parte de back 
-                 la tabla se cubrirá con datos de la base de datos. -->
-                <tr>
-                    <td>Cama eléctrica no sube</td>
-                    <td>Seefeld</td>
-                    <td><span class="badge bg-success">Completado</span></td>
-                    <td><span class="badge bg-warning text-dark">En proceso</span></td>
-                    <td>Jonas Keller</td>
-                    <td>2025-01-12 14:33</td>
-                </tr>
+                <?php if (empty($historial)): ?>
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            No hay incidencias en el historial.
+                        </td>
+                    </tr>
+                <?php else: ?>
+                    <?php foreach ($historial as $h): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($h['titulo']) ?></td>
+                            <td><?= htmlspecialchars($h['casa'] ?? 'Sin casa') ?></td>
 
-                <tr>
-                    <td>Luz fundida baño 101</td>
-                    <td>Kronenhof</td>
-                    <td><span class="badge bg-warning text-dark">En proceso</span></td>
-                    <td><span class="badge bg-secondary">No atendido</span></td>
-                    <td>Lena Schmidt</td>
-                    <td>2025-01-10 10:12</td>
-                </tr>
+                            <td>
+                                <span class="badge bg-success">
+                                    <?= htmlspecialchars($h['estado']) ?>
+                                </span>
+                            </td>
 
+                            <td><?= htmlspecialchars($h['tecnico'] ?? '—') ?></td>
+
+                            <td><?= date('Y-m-d H:i', strtotime($h['fecha_inicio'])) ?></td>
+                            <td><?= $h['fecha_fin'] ? date('Y-m-d H:i', strtotime($h['fecha_fin'])) : '—' ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>

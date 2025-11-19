@@ -11,6 +11,15 @@ $filtroEstado     = $_GET['estado']     ?? '';
 $filtroRelevancia = $_GET['relevancia'] ?? '';
 
 
+// $sql = "
+//     SELECT i.id_incidencia, i.titulo, i.relevancia, i.estado, i.fecha_inicio,
+//            h.numero AS habitacion_numero,
+//            c.nombre AS casa_nombre
+//     FROM incidencias i
+//     LEFT JOIN habitaciones h ON i.id_habitacion = h.id_habitacion
+//     LEFT JOIN casas c ON h.id_casa = c.id_casa
+//     WHERE 1 = 1
+// ";
 $sql = "
     SELECT i.id_incidencia, i.titulo, i.relevancia, i.estado, i.fecha_inicio,
            h.numero AS habitacion_numero,
@@ -18,7 +27,8 @@ $sql = "
     FROM incidencias i
     LEFT JOIN habitaciones h ON i.id_habitacion = h.id_habitacion
     LEFT JOIN casas c ON h.id_casa = c.id_casa
-    WHERE 1 = 1
+    WHERE i.estado != 'finalizada'   
+    ORDER BY i.fecha_inicio DESC
 ";
 
 $parametros = [];
