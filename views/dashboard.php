@@ -16,6 +16,7 @@ $db = $database->conectar();
 // Consultas que uso para recoger datos de la  base y los situo en el epartado de resumen
 $totalUrgentes = $db->query("SELECT COUNT(*) FROM incidencias WHERE relevancia = 'alto'")->fetchColumn();
 $totalProceso = $db->query("SELECT COUNT(*) FROM incidencias WHERE estado = 'en_proceso'")->fetchColumn();
+$totalNoAtendidas = $db->query("SELECT COUNT(*) FROM incidencias WHERE estado = 'no_atendido'")->fetchColumn();
 $totalCompletadas = $db->query("SELECT COUNT(*) FROM incidencias WHERE estado = 'completado'")->fetchColumn();
 //me interesa sacar la cuenta que tenbemos de las casa, es decir 3 por si en algún momento (hipoteticamente) se añade otra.
 $totalCasas = $db->query("SELECT COUNT(*) FROM casas ")->fetchColumn();
@@ -108,7 +109,7 @@ $totalCasas = $db->query("SELECT COUNT(*) FROM casas ")->fetchColumn();
                         <p>Incidencias urgentes</p>
                     </div>
                 </div>
-
+            <?php if ($_SESSION['rol'] === 'trabajador'): ?>
                 <div class="col-md-3">
                     <div class="caja-resumen shadow-sm">
                         <i class="bi bi-hourglass-split text-warning"></i>
@@ -116,6 +117,16 @@ $totalCasas = $db->query("SELECT COUNT(*) FROM casas ")->fetchColumn();
                         <p>En proceso</p>
                     </div>
                 </div>
+            <?php endif; ?>
+            <?php if ($_SESSION['rol'] === 'tecnico'): ?>
+                <div class="col-md-3">
+                    <div class="caja-resumen shadow-sm">
+                        <i class="bi bi-hourglass-split text-warning"></i>
+                        <h4><?php echo $totalNoAtendidas ?></h4>
+                        <p>No atendido</p>
+                    </div>
+                </div>
+            <?php endif; ?>
 
                 <div class="col-md-3">
                     <div class="caja-resumen shadow-sm">

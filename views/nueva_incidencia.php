@@ -1,4 +1,10 @@
-<?php include '../includes/header.php'; ?>
+<?php include '../includes/header.php';
+include '../includes/auth.php';
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'trabajador') {
+    header("Location: incidencias.php?error=solo_trabajadores");
+    exit;
+}
+?>
 <link rel="stylesheet" href="../assets/css/nueva_incidencia.css">
 
 <div class="container py-4" style="max-width: 700px;">
@@ -45,16 +51,10 @@
             </select>
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Estado</label>
-            <select name="estado" class="form-select" required>
-                <option value="no_atendido" selected>No atendido</option>
-                <option value="en_proceso">En proceso</option>
-                <option value="finalizada">Finalizada</option>
-            </select>
-        </div>
+        <!-- Campo oculto para todos -->
+        <input type="hidden" name="estado" value="no_atendido">
 
-        <input type="hidden" name="id_creador" value="1">
+        <input type="hidden" name="id_creador" value="<?= $_SESSION['id_usuario'] ?>">
 
         <button type="submit" class="btn btn-primary w-100">Crear incidencia</button>
     </form>
@@ -67,9 +67,9 @@
 <!-- Mi intención más adelante es que cuando se cree una nueva incidencia esta sea notificada con una pantallita emergente bonita
  mientras tanto lo haré con un alert-->
 <?php if (isset($_GET['exito']) && $_GET['exito'] == 1): ?>
-<script>
-    alert('Incidencia creada');
-</script>
+    <script>
+        alert('Incidencia creada');
+    </script>
 <?php endif; ?>
 
 <?php include '../includes/footer.php'; ?>
