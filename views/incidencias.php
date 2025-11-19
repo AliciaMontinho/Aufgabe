@@ -5,6 +5,11 @@ require_once '../config/Database.php';
 $database = new Database();
 $db = $database->conectar();
 
+$filtroCasa       = $_GET['casa']       ?? '';
+$filtroEstado     = $_GET['estado']     ?? '';
+$filtroRelevancia = $_GET['relevancia'] ?? '';
+
+
 $sql = "
     SELECT i.id_incidencia, i.titulo, i.relevancia, i.estado, i.fecha_inicio,
            h.numero AS habitacion_numero,
@@ -12,9 +17,34 @@ $sql = "
     FROM incidencias i
     LEFT JOIN habitaciones h ON i.id_habitacion = h.id_habitacion
     LEFT JOIN casas c ON h.id_casa = c.id_casa
-    ORDER BY i.fecha_inicio DESC
+    WHERE 1 = 1
 ";
+
+$parametros = [];
+
+if ($filtroCasa !== '') {
+    $sql .= " AND c.id_casa = :casa";
+    $parametros[':casa'] = $filtroCasa;
+}
+
+if ($filtroEstado !== '') {
+    $sql .= " AND i.estado = :estado";
+    $parametros[':estado'] = $filtroEstado;
+}
+
+if ($filtroRelevancia !== '') {
+    $sql .= " AND i.relevancia = :relevancia";
+    $parametros[':relevancia'] = $filtroRelevancia;
+}
+
+$sql .= " ORDER BY i.fecha_inicio DESC";
+
 $stmt = $db->prepare($sql);
+
+foreach ($parametros as $clave => $valor) {
+    $stmt->bindValue($clave, $valor);
+}
+
 $stmt->execute();
 $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
