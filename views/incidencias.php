@@ -1,6 +1,7 @@
 <?php
 include_once '../includes/header.php';
 require_once '../config/Database.php';
+require_once '../includes/auth.php';
 
 $database = new Database();
 $db = $database->conectar();
@@ -168,9 +169,12 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <a href="detalle_incidencia.php?id=<?= $i['id_incidencia'] ?>" class="btn btn-sm btn-info text-white me-1">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <a href="editar_incidencia.php?id=<?= $i['id_incidencia'] ?>" class="btn btn-sm btn-warning text-white">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
+                                <!-- Monstrar el botón de editar incidencia solo si el rol del ususario en sesióin es técnico -->
+                                <?php if ($_SESSION['rol'] === 'tecnico'): ?>
+                                    <a href="editar_incidencia.php?id=<?= $i['id_incidencia'] ?>" class="btn btn-sm btn-warning text-white">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

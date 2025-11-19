@@ -4,6 +4,12 @@ include '../includes/auth.php';
 require_once '../config/Database.php';
 require_once '../models/Incidencia.php';
 
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'tecnico') {
+    header("Location: incidencias.php?error=permiso_denegado");
+    exit;
+}
+
+
 $database = new Database();
 $db = $database->conectar();
 
