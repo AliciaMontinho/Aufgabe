@@ -50,18 +50,6 @@ CREATE TABLE incidencias (
         ON DELETE SET NULL ON UPDATE CASCADE
 );
 
-CREATE TABLE historial_estados (
-    id_historial INT AUTO_INCREMENT PRIMARY KEY,
-    id_incidencia INT NOT NULL,
-    estado_anterior ENUM('no_atendido', 'en_proceso', 'completado') NULL,
-    estado_nuevo ENUM('no_atendido', 'en_proceso', 'completado') NOT NULL,
-    fecha_cambio DATETIME DEFAULT CURRENT_TIMESTAMP,
-    id_tecnico INT,
-    FOREIGN KEY (id_incidencia) REFERENCES incidencias(id_incidencia)
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (id_tecnico) REFERENCES usuarios(id_usuario)
-        ON DELETE SET NULL ON UPDATE CASCADE
-);
 
 INSERT INTO casas (nombre, direccion, telefono) VALUES
 ('Kronenhof', 'Calle Hauptstrasse 12, Zürich', '+41 44 123 4567'),
@@ -71,10 +59,10 @@ INSERT INTO casas (nombre, direccion, telefono) VALUES
 INSERT INTO usuarios (nombre, apellido, email, password, rol) VALUES
 ('Anna', 'Müller', 'anna.muller@aufgabe.ch', '1234', 'trabajador'),
 ('Markus', 'Steiner', 'markus.steiner@aufgabe.ch', '1234', 'trabajador'),
-('Jonas', 'Keller', 'jonas.keller@aufgabe.ch', '1234', 'técnico'),
-('Lena', 'Schmidt', 'lena.schmidt@aufgabe.ch', '1234', 'técnico'),
+('Jonas', 'Keller', 'jonas.keller@aufgabe.ch', '1234', 'tecnico'),
+('Lena', 'Schmidt', 'lena.schmidt@aufgabe.ch', '1234', 'tecnico'),
 ('Alicia', 'Montinho','aliciamontinho@gmail.com', '1234', 'trabajador'),
-('Artur', 'Montinho','martinsart@gmail.com', '1234', 'técnico');
+('Artur', 'Montinho','martinsart@gmail.com', '1234', 'tecnico');
 
 INSERT INTO habitaciones (numero, id_casa, descripcion) VALUES
 ('Sala de enfermeros', 1, 'Sala equipada para el personal de enfermería'),
@@ -156,11 +144,13 @@ INSERT INTO habitaciones (numero, id_casa, descripcion) VALUES
 ('320', 3, 'Habitación individual para tratamiento intensivo');
 
 
-INSERT INTO incidencias (titulo, descripcion, relevancia, estado, id_habitacion, id_creador, id_tecnico)
+INSERT INTO incidencias (titulo, descripcion, relevancia, estado, fecha_inicio, fecha_fin, id_habitacion, id_creador, id_tecnico)
 VALUES
-('Luz fundida en baño', 'La bombilla del baño no enciende.', 'medio', 'no_atendido', 1, 1, 3),
-('Cama eléctrica no sube', 'El motor de la cama no responde.', 'alto', 'en_proceso', 3, 2, 4);
-
-INSERT INTO historial_estados (id_incidencia, estado_anterior, estado_nuevo, id_tecnico)
-VALUES
-(2, 'no_atendido', 'en_proceso', 4);
+('Luz fundida en baño', 'La luz del baño no funciona', 'medio', 'no_atendido', '2025-01-15 09:00:00', NULL, 38, 5, NULL),
+('Fuga de agua en pasillo', 'Se observa humedad en la pared', 'alto', 'no_atendido', '2025-02-08 11:20:00', NULL, 33, 5, NULL),
+('Ascensor estropeado', 'El ascensor no arranca correctamente', 'alto', 'en_proceso', '2025-02-12 08:15:00', NULL, 15, 1, 4),
+('Ventana rota', 'Cristal agrietado en la ventana', 'medio', 'en_proceso', '2025-02-10 15:00:00', NULL, 54, 5, 2),
+('Cama eléctrica no sube', 'El motor de la cama no responde al botón', 'alto', 'completado', '2025-01-20 10:00:00', '2025-01-21 16:30:00', 70, 2, 4),
+('Problemas de calefacción', 'Temperatura demasiado baja en invierno', 'medio', 'completado', '2024-02-01 08:00:00', '2024-02-03 12:45:00', 29, 5, 3),
+('Mal olor en la habitación', 'Posible fuga en el sistema de ventilación', 'bajo', 'completado', '2023-01-10 14:00:00', '2023-01-11 09:20:00', 21, 2, 6),
+('Puerta principal no cierra', 'La cerradura no hace clic bien', 'medio', 'completado', '2023-01-29 09:30:00', '2023-01-29 11:40:00', 46, 2, 6);
