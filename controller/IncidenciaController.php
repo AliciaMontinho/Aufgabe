@@ -120,6 +120,13 @@ switch ($action) {
         }
         break;
 
+    //Actualizar para el correcto funcionamiento de editar_incidencia.php
+    case 'actualizar':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $controller->actualizar($_POST);
+        }
+        break;
+
     //Acción AJAX
     case 'habitaciones':
         if (isset($_GET['id_casa'])) {
