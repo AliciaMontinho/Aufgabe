@@ -56,16 +56,32 @@ $totalCasas = $db->query("SELECT COUNT(*) FROM casas ")->fetchColumn();
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="card shadow-sm border-0 dashboard-card h-100">
-                    <div class="card-body text-center">
-                        <i class="bi bi-plus-circle text-warning" style="font-size:3rem;"></i>
-                        <h4 class="mt-3 fw-semibold">Nueva incidencia</h4>
-                        <p class="text-muted">Registra un nuevo problema rápidamente.</p>
-                        <a href="nueva_incidencia.php" class="btn btn-warning text-white w-100">Crear incidencia</a>
+            <?php if ($_SESSION['rol'] === 'trabajador'): ?>
+                <!--Lo que verán los trabajadores -->
+                <div class="col-md-4">
+                    <div class="card card-incidencia shadow-sm border-0 dashboard-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-plus-circle icono-incidencia text-warning" style="font-size:3rem;"></i>
+                            <h4 class="mt-3 fw-semibold">Nueva incidencia</h4>
+                            <p class="text-muted">Registra un nuevo problema rápidamente.</p>
+                            <a href="nueva_incidencia.php" class="btn btn-warning boton-incidencia text-white w-100">Crear incidencia</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php endif; ?>
+            <!--Lo que verán los técnicos -->
+            <?php if ($_SESSION['rol'] === 'tecnico'): ?>
+                <div class="col-md-4">
+                     <div class="card card-incidencia shadow-sm border-0 dashboard-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-eye-fill icono-incidencia text-warning" style="font-size:3rem;"></i>
+                            <h4 class="mt-3 fw-semibold">Ver incidencias</h4>
+                            <p class="text-muted">Gestiona las incidencias registradas.</p>
+                            <a href="incidencias.php" class="btn  btn-warning boton-incidencia  text-white w-100">Ver incidencias</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
 
             <div class="col-md-4">
                 <div class="card shadow-sm border-0 dashboard-card h-100">
@@ -79,7 +95,7 @@ $totalCasas = $db->query("SELECT COUNT(*) FROM casas ")->fetchColumn();
             </div>
 
         </div>
-    <!-- Utilización de consultas anteriores para el resumen general -->
+        <!-- Utilización de consultas anteriores para el resumen general -->
         <div class="mt-5">
             <h3 class="texto-secundario mb-3">Resumen general</h3>
 
