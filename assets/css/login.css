@@ -51,3 +51,7 @@
   background-color: #0b5ed7;
   transform: scale(1.02);
 }
+
+.btn-primary{
+  width: 100%;
+}
