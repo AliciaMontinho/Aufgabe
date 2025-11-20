@@ -26,3 +26,18 @@
     padding: 10px;
 }
 
+/*modo oscuro*/
+.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+.dark-mode .card {
+    background-color: #1f1f1f;
+    color: white;
+}
+
+.dark-mode input {
+    background-color: #333;
+    color: white;
+}
