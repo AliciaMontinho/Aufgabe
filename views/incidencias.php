@@ -10,16 +10,7 @@ $filtroCasa       = $_GET['casa']       ?? '';
 $filtroEstado     = $_GET['estado']     ?? '';
 $filtroRelevancia = $_GET['relevancia'] ?? '';
 
-
-// $sql = "
-//     SELECT i.id_incidencia, i.titulo, i.relevancia, i.estado, i.fecha_inicio,
-//            h.numero AS habitacion_numero,
-//            c.nombre AS casa_nombre
-//     FROM incidencias i
-//     LEFT JOIN habitaciones h ON i.id_habitacion = h.id_habitacion
-//     LEFT JOIN casas c ON h.id_casa = c.id_casa
-//     WHERE 1 = 1
-// ";
+//solo incidencias no atendidas o en proceso
 $sql = "
     SELECT i.id_incidencia, i.titulo, i.relevancia, i.estado, i.fecha_inicio,
            h.numero AS habitacion_numero,
@@ -27,12 +18,10 @@ $sql = "
     FROM incidencias i
     LEFT JOIN habitaciones h ON i.id_habitacion = h.id_habitacion
     LEFT JOIN casas c ON h.id_casa = c.id_casa
-    WHERE i.estado != 'finalizada'   
-    ORDER BY i.fecha_inicio DESC
+    WHERE i.estado != 'completado'
 ";
 
 $parametros = [];
-
 if ($filtroCasa !== '') {
     $sql .= " AND c.id_casa = :casa";
     $parametros[':casa'] = $filtroCasa;
@@ -51,11 +40,9 @@ if ($filtroRelevancia !== '') {
 $sql .= " ORDER BY i.fecha_inicio DESC";
 
 $stmt = $db->prepare($sql);
-
 foreach ($parametros as $clave => $valor) {
     $stmt->bindValue($clave, $valor);
 }
-
 $stmt->execute();
 $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -92,7 +79,6 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <option value="">Todos</option>
                     <option value="no_atendido">No atendido</option>
                     <option value="en_proceso">En proceso</option>
-                    <option value="completado">Completado</option>
                 </select>
             </div>
 

@@ -74,7 +74,7 @@ if ($idCasaSeleccionada) {
                                 <td><?= $h['total_incidencias'] ?></td>
                                 <td>
                                     <!-- El botón ver incidencias nos redirige al historial de incidencias -->
-                                    <a href="historial/historial.php?id_habitacion=<?= $h['id_habitacion'] ?>"
+                                    <a href="historial.php?id_habitacion=<?= $h['id_habitacion'] ?>"
                                         class="btn btn-sm btn-outline-primary">
                                         Ver incidencias
                                     </a>
