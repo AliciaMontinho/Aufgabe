@@ -54,7 +54,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'trabajador') {
         <!-- Campo oculto para todos -->
         <input type="hidden" name="estado" value="no_atendido">
 
-        <input type="hidden" name="id_creador" value="<?= $_SESSION['id_usuario'] ?>">
+        <input type="hidden" name="id_creador" value="<?= $_SESSION['usuario_id'] ?>">
 
         <button type="submit" class="btn btn-primary w-100">Crear incidencia</button>
     </form>

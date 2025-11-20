@@ -40,23 +40,24 @@ include_once '../includes/auth.php'
     <div class="card  p-4 mb-4">
         <h5 class="fw-bold mb-3">Cambiar contraseña</h5>
 
-        <form>
+        <form action="../controller/UsuarioController.php?action=cambiarPassword" method="POST">
             <div class="mb-3">
                 <label class="form-label">Contraseña actual</label>
-                <input type="password" class="form-control" placeholder="Introduce tu contraseña actual">
+                <input type="password" name="password_actual" class="form-control" placeholder="Introduce tu contraseña actual" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Nueva contraseña</label>
-                <input type="password" class="form-control" placeholder="Nueva contraseña">
+                <input type="password" name="password_nueva" class="form-control" placeholder="Nueva contraseña" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Repite la nueva contraseña</label>
-                <input type="password" class="form-control" placeholder="Repite la contraseña">
+                <input type="password" name="password_repetir" class="form-control" placeholder="Repite la contraseña" required>
             </div>
 
-            <button type="submit" class="boton px-4">Guardar cambios</button>
+           <button type="submit" class="boton px-4">Guardar cambios</button>
+
         </form>
     </div>
 
@@ -81,5 +82,7 @@ include_once '../includes/auth.php'
     </div>
 
 </div>
+
+<script src="../assets/js/configuracion.js"></script>
 
 <?php include_once '../includes/footer.php'; ?>

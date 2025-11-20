@@ -9,12 +9,12 @@
 
             <div class="mb-3">
                 <!-- Si existe una cookie (Se ha seleccionado el campo recuerdam) rellenamos el campo email -->
-                <label for="email" class="form-label">Email address</label>
+                <label for="email" class="form-label">Correo electrónico:</label>
                 <input type="email" name="email" class="form-control" id="email" value="<?php echo $_COOKIE['usuario_email'] ?? '' ?>">
                 <div id="emailAviso" class="form-text">No compartiremos tus datos con externos.</div>
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="form-label">Contraseña:</label>
                 <input type="password" class="form-control" name="password" id="password">
             </div>
             <div class="mb-3 form-check">
