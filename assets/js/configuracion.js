@@ -48,8 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => div.remove(), 3500);
     }
 
-
-
     const cbNotificaciones = document.getElementById("notificaciones");
     const cbModoOscuro = document.getElementById("temaOscuro");
 
