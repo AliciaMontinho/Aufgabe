@@ -42,6 +42,43 @@ class UsuarioController
         }
     }
 
+
+     public function cambiarPassword()
+    {
+        session_start();
+        $email = $_SESSION['email'];
+
+        $actual = $_POST['password_actual'] ?? '';
+        $nueva = $_POST['password_nueva'] ?? '';
+        $repetir = $_POST['password_repetir'] ?? '';
+
+    
+        if (empty($actual) || empty($nueva) || empty($repetir)) {
+            header("Location: ../views/configuracion.php?error=campos_vacios");
+            exit;
+        }
+
+        if ($nueva !== $repetir) {
+            header("Location: ../views/configuracion.php?error=no_coinciden");
+            exit;
+        }
+
+       
+        $usuario = $this->usuarioModel->obtenerPorEmail($email);
+        if (!$usuario || !password_verify($actual, $usuario['password'])) {
+            header("Location: ../views/configuracion.php?error=incorrecta");
+            exit;
+        }
+
+        $ok = $this->usuarioModel->cambiarPassword($email, $nueva);
+        if ($ok) {
+            header("Location: ../views/configuracion.php?ok=1");
+        } else {
+            header("Location: ../views/configuracion.php?error=bd");
+        }
+        exit;
+    }
+
     // Cerrar sesión
     public function logout()
     {
@@ -61,4 +98,6 @@ if ($action === 'login') {
     $controller->login($_POST['email'], $_POST['password']);
 } elseif ($action === 'logout') {
     $controller->logout();
+} elseif ($action === 'cambiarPassword') {
+    $controller->cambiarPassword();
 }

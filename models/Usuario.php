@@ -18,22 +18,42 @@ class Usuario {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Verificar usuario en login
+    private function actualizarPasswordHash($email, $nuevoHash) {
+        $sql = "UPDATE {$this->table} SET password = :password WHERE email = :email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":password", $nuevoHash);
+        $stmt->bindParam(":email", $email);
+        $stmt->execute();
+    }
+
+  
     public function verificarUsuario($email, $password) {
         $usuario = $this->obtenerPorEmail($email);
 
-        if (!$usuario) {
-            return false;
+        if (!$usuario) return false;
+
+        $passBD = $usuario['password'];
+
+        if (!password_get_info($passBD)['algo']) {
+            if ($password === $passBD) {
+                $nuevoHash = password_hash($password, PASSWORD_DEFAULT);
+                $this->actualizarPasswordHash($email, $nuevoHash);  
+                return $usuario;
+            } else {
+                return false; 
+            }
         }
 
-        // Contraseñas en tu BD NO están en hash, así que temporalmente:
-        if ($password === $usuario['password']) {
+        if (password_verify($password, $passBD)) {
             return $usuario;
         }
 
-        // Si luego actualizas, deja esto:
-        // if (password_verify($password, $usuario['password'])) { return $usuario; }
-
         return false;
+    }
+
+    public function cambiarPassword($email, $nuevaPassword) {
+        $nuevoHash = password_hash($nuevaPassword, PASSWORD_DEFAULT);
+        $this->actualizarPasswordHash($email, $nuevoHash);
+        return true;
     }
 }
