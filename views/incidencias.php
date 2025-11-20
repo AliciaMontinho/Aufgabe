@@ -51,7 +51,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="container incidencias-container py-4">
 
-    <div class="contenedor-boton">
+    <div class="text-center mb-4">
         <h2 class="text-primary fw-bold">
             <i class="bi bi-exclamation-octagon-fill me-2"></i> Incidencias
         </h2>
@@ -60,8 +60,8 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </a>
     </div>
 
-    <div class="card shadow-sm p-3 mb-4 filtro-incidencias">
-        <form class="row g-3" method="GET" action="">
+    <div class="card shadow-sm p-4 mb-4 filtro-incidencias">
+        <form class="row g-3" id="filtroForm">
 
             <div class="col-md-3">
                 <label class="form-label fw-semibold">Casa</label>
@@ -180,4 +180,5 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
+<script src="../assets/js/incidencias.js"></script>
 <?php include_once '../includes/footer.php'; ?>

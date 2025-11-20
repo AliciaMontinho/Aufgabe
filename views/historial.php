@@ -35,6 +35,10 @@ if ($mes !== '') {
     $sql .= " AND MONTH(i.fecha_fin) = :month";
 }
 
+// if (!empty($_GET['casa'])) {
+//     $sql .= " AND c.id_casa = :casa";
+// }
+
 $sql .= " ORDER BY i.fecha_fin DESC"; //concatena a la consulta principal
 
 $stmt = $db->prepare($sql);
@@ -56,39 +60,49 @@ $historial = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <!--filtros-->
     <div class="card shadow-sm p-4 filtro-historial mb-4">
-        <form class="row g-3" method="GET">
-            <div class="col-md-4">
-                <label class="form-label fw-semibold">Año</label>
-                <select class="form-select" name="ano">
-                    <option value="">Todos</option>
-                    <option value="2026" <?= $ano=="2026" ? 'selected' : '' ?>>2026</option>
-                    <option value="2025" <?= $ano=="2025" ? 'selected' : '' ?>>2025</option>
-                    <option value="2024" <?= $ano=="2024" ? 'selected' : '' ?>>2024</option>
-                    <option value="2023" <?= $ano=="2023" ? 'selected' : '' ?>>2023</option>
-                </select>
-            </div>
+        <form class="row g-3" id="filtroHistorial">
 
-            <div class="col-md-4">
-                <label class="form-label fw-semibold">Mes</label>
-                <select class="form-select" name="mes">
-                    <option value="">Todos</option>
-                    <?php 
-                    $meses = ["1"=>"Enero","2"=>"Febrero","3"=>"Marzo","4"=>"Abril","5"=>"Mayo",
-                              "6"=>"Junio","7"=>"Julio","8"=>"Agosto","9"=>"Septiembre",
-                              "10"=>"Octubre","11"=>"Noviembre","12"=>"Diciembre"];
-                    foreach ($meses as $num => $nombre): ?>
-                        <option value="<?= $num ?>" <?= ($mes==$num ? 'selected' : '') ?>><?= $nombre ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-
-            <div class="col-md-4 d-flex align-items-end">
-                <button class="btn btn-primary w-100 fw-semibold">
-                    <i class="bi bi-funnel-fill me-1"></i> Filtrar
-                </button>
-            </div>
-        </form>
+    <div class="col-md-3">
+        <label class="form-label fw-semibold">Casa</label>
+        <select class="form-select" name="casa">
+            <option value="">Todas</option>
+            <option value="1">Kronenhof</option>
+            <option value="2">Seefeld</option>
+            <option value="3">Seeheim</option>
+        </select>
     </div>
+
+    <div class="col-md-3">
+        <label class="form-label fw-semibold">Año</label>
+        <select class="form-select" name="ano">
+            <option value="">Todos</option>
+            <option value="2026">2026</option>
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <label class="form-label fw-semibold">Mes</label>
+        <select class="form-select" name="mes">
+            <option value="">Todos</option>
+            <?php 
+            $meses = ["1"=>"Enero","2"=>"Febrero","3"=>"Marzo","4"=>"Abril","5"=>"Mayo",
+                      "6"=>"Junio","7"=>"Julio","8"=>"Agosto","9"=>"Septiembre",
+                      "10"=>"Octubre","11"=>"Noviembre","12"=>"Diciembre"];
+            foreach ($meses as $num => $nombre): ?>
+                <option value="<?= $num ?>"><?= $nombre ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+
+    <div class="col-md-3 d-flex align-items-end">
+        <button class="btn btn-primary w-100 fw-semibold">
+            <i class="bi bi-funnel-fill me-1"></i> Filtrar
+        </button>
+    </div>
+</form><br>
 
     <!--tabla del historial -->
     <div class="table-responsive">
@@ -128,4 +142,5 @@ $historial = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
+<script src="../assets/js/historial.js"></script>
 <?php include_once '../includes/footer.php'; ?>

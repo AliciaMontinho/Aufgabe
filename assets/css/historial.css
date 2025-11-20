@@ -15,12 +15,19 @@
 }
 
 .tabla-historial {
-    background-color: #0d6efd !important;
+    background-color: #d9e5ff !important;
     color: white;
 }
 
-.tabla-historial {
-    background-color: #eef4ff;
+
+
+.tabla-historial tbody tr {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .4s ease, transform .4s ease;
 }
 
-
+.tabla-historial tbody tr.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
