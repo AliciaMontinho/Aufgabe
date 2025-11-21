@@ -8,7 +8,7 @@
   <div class="card shadow p-4" style="width: 500px; border-radius: 20px;">
     <h3 class="text-center mb-4 text-primary">Contacto</h3>
 
-    <form action="#" method="POST">
+    <form action="#" id="formContacto"    method="POST">
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre completo</label>
         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Tu nombre">

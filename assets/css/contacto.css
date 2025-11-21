@@ -62,3 +62,34 @@
 .text-muted a:hover {
   text-decoration: underline;
 }
+
+
+
+.is-valid {
+    border: 2px solid #28a745 !important;
+}
+.is-invalid {
+    border: 2px solid #dc3545 !important;
+}
+
+
+.mensaje-flotante{
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: #444;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    opacity: 0;
+    animation: fadeIn .3s forwards;
+    z-index: 9999;
+}
+.mensaje-flotante.exito { background: #28a745; }
+.mensaje-flotante.error { background: #dc3545; }
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}

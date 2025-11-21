@@ -1,46 +1,79 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", () => {
 
-    const formulario = document.querySelector("form");
+    const form = document.getElementById("formContacto");
+    const inputs = form.querySelectorAll("input, textarea");
+    const btn = form.querySelector("button");
 
-    formulario.addEventListener("submit", function (e) {
-        let errores = [];
+    btn.disabled = true; // inicio
+    btn.style.opacity = "0.6";
 
-        const nombre = document.getElementById("nombre");
-        const email = document.getElementById("email");
-        const asunto = document.getElementById("asunto");
-        const mensaje = document.getElementById("mensaje");
+    const validaciones = {
+        nombre: valor => valor.trim().length >= 3,
+        email: valor => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor),
+        asunto: valor => valor.trim().length >= 4,
+        mensaje: valor => valor.trim().length >= 10
+    };
 
-        // Limpiar errores anteriores
-        document.querySelectorAll(".error").forEach(el => el.remove());
-
-        if (nombre.value.trim() === "") {
-            errores.push("El campo nombre es obligatorio");
-        }
-
-        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (email.value.trim() === "" || !regexEmail.test(email.value)) {
-            errores.push("El campo email es obligatorio y debe ser válido");
-        }
-
-        if (asunto.value.trim().length < 10) {
-            errores.push("El campo asunto debe tener al menos 10 caracteres");
-        }
-
-        if (errores.length > 0) {
-
-            errores.forEach(function (error) {
-                const errorElemento = document.createElement("div");
-                errorElemento.classList.add("error", "text-danger", "mb-2");
-                errorElemento.innerText = error;
-                formulario.prepend(errorElemento);
-            });
-        }
-
-
-        formulario.reset();
-
-        alert("Tu mensaje ha sido enviado con éxito.");
-        window.location.href = "contacto.php";
+    inputs.forEach(input => {
+        input.addEventListener("input", () => {
+            validarInput(input);
+            verificarFormulario();
+        });
     });
 
+    form.addEventListener("submit", e => {
+        e.preventDefault();
+        if (verificarFormulario()) {
+            mostrarMensaje("Formulario validado correctamente.", "exito");
+            // Aquí podrías enviar el formulario con AJAX si tuvieras backend
+            form.reset();
+            btn.disabled = true;
+            btn.style.opacity = "0.6";
+            limpiarClases();
+        } else {
+            mostrarMensaje("Por favor, revisa los campos marcados.", "error");
+        }
+    });
+
+    function validarInput(input) {
+        const campo = input.name;
+        const valor = input.value;
+
+        if (validaciones[campo] && validaciones[campo](valor)) {
+            input.classList.remove("is-invalid");
+            input.classList.add("is-valid");
+        } else {
+            input.classList.remove("is-valid");
+            input.classList.add("is-invalid");
+        }
+    }
+
+    function verificarFormulario() {
+        for (let input of inputs) {
+            if (validaciones[input.name] && !validaciones[input.name](input.value)) {
+                btn.disabled = true;
+                btn.style.opacity = "0.6";
+                btn.style.cursor = "not-allowed";
+                return false;
+            }
+        }
+        btn.disabled = false;
+        btn.style.opacity = "1";
+        btn.style.cursor = "pointer";
+        return true;
+    }
+
+    function limpiarClases() {
+        inputs.forEach(input =>
+            input.classList.remove("is-valid","is-invalid")
+        );
+    }
+
+    function mostrarMensaje(texto, tipo) {
+        const div = document.createElement("div");
+        div.textContent = texto;
+        div.classList.add("mensaje-flotante", tipo);
+        document.body.appendChild(div);
+        setTimeout(() => div.remove(), 3500);
+    }
 });
