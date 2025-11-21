@@ -24,3 +24,79 @@ h3 {
   background-color: #0b5ed7;
 }
 
+
+html.dark-mode,
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #f1f1f1 !important;
+}
+
+html.dark-mode body,
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #f1f1f1 !important;
+}
+
+html.dark-mode .card,
+body.dark-mode .card {
+    background: #1e1e1e !important;
+    color: white !important;
+}
+
+html.dark-mode .form-control,
+body.dark-mode .form-control {
+    background-color: #2d2d2d !important;
+    color: #f1f1f1 !important;
+    border-color: #444 !important;
+}
+
+html.dark-mode .form-control:disabled,
+body.dark-mode .form-control:disabled {
+    background-color: #333 !important;
+    color: #999 !important;
+}
+
+html.dark-mode .form-label,
+body.dark-mode .form-label {
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .btn-primary,
+html.dark-mode .btn-warning,
+html.dark-mode .btn-success,
+body.dark-mode .btn-primary,
+body.dark-mode .btn-warning,
+body.dark-mode .btn-success {
+    filter: brightness(1.1);
+}
+
+html.dark-mode .navbar,
+body.dark-mode .navbar {
+    background-color: #1a1a1a !important;
+}
+
+html.dark-mode .dropdown-menu,
+body.dark-mode .dropdown-menu {
+    background-color: #2d2d2d !important;
+}
+
+html.dark-mode .dropdown-item,
+body.dark-mode .dropdown-item {
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .dropdown-item:hover,
+body.dark-mode .dropdown-item:hover {
+    background-color: #3d3d3d !important;
+    color: #fff !important;
+}
+
+html.dark-mode .dropdown-divider,
+body.dark-mode .dropdown-divider {
+    border-color: #444 !important;
+}
+
+html.dark-mode .text-muted,
+body.dark-mode .text-muted {
+    color: #999 !important;
+}

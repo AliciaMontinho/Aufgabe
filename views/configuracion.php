@@ -74,7 +74,7 @@ include_once '../includes/auth.php'
         <div class="form-check ">
             <input class="form-check-input" type="checkbox" id="temaOscuro">
             <label class="form-check-label" for="temaOscuro">
-                Activar modo oscuro (no implementado)
+                Activar modo oscuro
             </label>
         </div>
 

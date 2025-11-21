@@ -26,18 +26,19 @@
     padding: 10px;
 }
 
-/*modo oscuro*/
-.dark-mode {
-    background-color: #121212;
-    color: white;
+/* Estilos para dark mode */
+body.dark-mode .titulo-configuracion {
+    color: #e0e0e0;
 }
 
-.dark-mode .card {
-    background-color: #1f1f1f;
-    color: white;
+body.dark-mode .card h5 {
+    color: #64b5f6;
 }
 
-.dark-mode input {
-    background-color: #333;
-    color: white;
+body.dark-mode .boton {
+    background-color: #0d6efd;
+}
+
+body.dark-mode .boton:hover {
+    background-color: #0b5ed7;
 }

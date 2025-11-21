@@ -64,4 +64,5 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("temaOscuro", cbModoOscuro.checked);
         document.body.classList.toggle("dark-mode");
     });
+
 });
