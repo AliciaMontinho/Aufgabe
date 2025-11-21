@@ -101,12 +101,4 @@ $casa = $stmt->fetch(PDO::FETCH_ASSOC);
 
 <script src="../assets/js/editar_incidencia.js"></script>
 
-<!-- Mi intención más adelante es que cuando se cree una nueva incidencia esta sea notificada con una pantallita emergente bonita
- mientras tanto lo haré con un alert-->
-<?php if (isset($_GET['exito']) && $_GET['exito'] == 1): ?>
-    <script>
-        alert('Incidencia creada');
-    </script>
-<?php endif; ?>
-
 <?php include '../includes/footer.php'; ?>

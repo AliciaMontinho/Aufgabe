@@ -36,3 +36,37 @@ font-weight: bold;
     opacity: 1;
     transform: translateY(0);
 }
+
+
+
+/* Estilos toast */
+.toast-notificacion {
+    position: fixed;
+    top: 20px;
+    right: -300px;
+    background-color: #198754;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    font-size: 15px;
+    transition: right 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    z-index: 9999;
+}
+
+.toast-notificacion.mostrar {
+    right: 20px;
+    opacity: 1;
+}
+
+.toast-notificacion.error {
+    background-color: #dc3545;
+}
+
+.toast-notificacion i {
+    font-size: 18px;
+}

@@ -45,7 +45,7 @@ class IncidenciaController
         $ok = $this->incidenciaModel->crearIncidencia($datos);
 
         if ($ok) {
-            header("Location: ../views/nueva_incidencia.php?exito=1");
+            header("Location: ../views/incidencias.php?exito=1");
             exit;
         } else {
             echo "<div class='alert alert-danger text-center mt-3'>Error al crear la incidencia.</div>";

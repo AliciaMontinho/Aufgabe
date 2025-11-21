@@ -64,12 +64,4 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'trabajador') {
 <script src="../assets/js/nueva_incidencia.js"></script>
 
 
-<!-- Mi intención más adelante es que cuando se cree una nueva incidencia esta sea notificada con una pantallita emergente bonita
- mientras tanto lo haré con un alert-->
-<?php if (isset($_GET['exito']) && $_GET['exito'] == 1): ?>
-    <script>
-        alert('Incidencia creada');
-    </script>
-<?php endif; ?>
-
 <?php include '../includes/footer.php'; ?>

@@ -47,6 +47,7 @@
 
 /* Estilos para el selector de habitación con AJAX*/
 #habitacionSeleccionada, #habitacionSeleccionada option {
-  color: #212529 !important;      /* texto oscuro */
-  background: #fff !important;    /* fondo blanco */
+  color: #212529 !important;      
+  background: #fff !important;    
 }
+

@@ -180,5 +180,23 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
+<?php if (isset($_GET['exito']) && $_GET['exito'] == 1): ?>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        mostrarToast("Incidencia creada correctamente", "success");
+    });
+</script>
+<?php endif; ?>
+
+<?php if (isset($_GET['actualizado']) && $_GET['actualizado'] == 1): ?>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            mostrarToast("Incidencia actualizada correctamente", "success");
+        });
+    </script>
+<?php endif; ?>
+
+
 <script src="../assets/js/incidencias.js"></script>
+<script src="../assets/js/toast.js"></script>
 <?php include_once '../includes/footer.php'; ?>
