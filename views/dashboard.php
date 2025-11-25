@@ -73,7 +73,7 @@ $totalCasas = $db->query("SELECT COUNT(*) FROM casas ")->fetchColumn();
             <!--Lo que verán los técnicos -->
             <?php if ($_SESSION['rol'] === 'tecnico'): ?>
                 <div class="col-md-4">
-                     <div class="card card-incidencia shadow-sm border-0 dashboard-card h-100">
+                    <div class="card card-incidencia shadow-sm border-0 dashboard-card h-100">
                         <div class="card-body text-center">
                             <i class="bi bi-eye-fill icono-incidencia text-warning" style="font-size:3rem;"></i>
                             <h4 class="mt-3 fw-semibold">Ver incidencias</h4>
@@ -109,24 +109,24 @@ $totalCasas = $db->query("SELECT COUNT(*) FROM casas ")->fetchColumn();
                         <p>Incidencias urgentes</p>
                     </div>
                 </div>
-            <?php if ($_SESSION['rol'] === 'trabajador'): ?>
-                <div class="col-md-3">
-                    <div class="caja-resumen shadow-sm">
-                        <i class="bi bi-hourglass-split text-warning"></i>
-                        <h4><?php echo $totalProceso ?></h4>
-                        <p>En proceso</p>
+                <?php if ($_SESSION['rol'] === 'trabajador'): ?>
+                    <div class="col-md-3">
+                        <div class="caja-resumen shadow-sm">
+                            <i class="bi bi-hourglass-split text-warning"></i>
+                            <h4><?php echo $totalProceso ?></h4>
+                            <p>En proceso</p>
+                        </div>
                     </div>
-                </div>
-            <?php endif; ?>
-            <?php if ($_SESSION['rol'] === 'tecnico'): ?>
-                <div class="col-md-3">
-                    <div class="caja-resumen shadow-sm">
-                        <i class="bi bi-hourglass-split text-warning"></i>
-                        <h4><?php echo $totalNoAtendidas ?></h4>
-                        <p>No atendido</p>
+                <?php endif; ?>
+                <?php if ($_SESSION['rol'] === 'tecnico'): ?>
+                    <div class="col-md-3">
+                        <div class="caja-resumen shadow-sm">
+                            <i class="bi bi-hourglass-split text-warning"></i>
+                            <h4><?php echo $totalNoAtendidas ?></h4>
+                            <p>No atendido</p>
+                        </div>
                     </div>
-                </div>
-            <?php endif; ?>
+                <?php endif; ?>
 
                 <div class="col-md-3">
                     <div class="caja-resumen shadow-sm">
@@ -149,5 +149,17 @@ $totalCasas = $db->query("SELECT COUNT(*) FROM casas ")->fetchColumn();
 
     </div>
 </div>
+<!--Mejoras dinámicas de la página principal con js :) -->
 
+<?php if ($totalUrgentes > 0): ?>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Reutilizo toast.js
+            mostrarToast("¡Hay <?= $totalUrgentes ?> incidencias URGENTES!", "warning");
+        });
+    </script>
+<?php endif; ?>
+<!-- Reutilizo toast.js -->
+<script src="../assets/js/toast.js"></script>
+<script src="../assets/js/dashboard.js"></script>
 <?php include_once '../includes/footer.php'; ?>
