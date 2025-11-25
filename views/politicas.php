@@ -1,4 +1,12 @@
-<?php include_once("../includes/header_login.php"); ?>
+<?php
+session_start();
+
+if (isset($_SESSION['usuario_id'])) {
+    include '../includes/header.php';
+} else {
+    include '../includes/header_login.php';
+}
+?>
 <link rel="stylesheet" href="../assets/css/politicas.css">
 
 <div class="container mt-4 mb-5 politicas-container">

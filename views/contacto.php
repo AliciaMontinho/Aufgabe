@@ -1,7 +1,15 @@
 
 
 <!-- Diseñada pero sin back todavía -->
-<?php include_once '../includes/header_login.php'; ?>
+<?php
+session_start();
+
+if (isset($_SESSION['usuario_id'])) {
+    include '../includes/header.php';
+} else {
+    include '../includes/header_login.php';
+}
+?>
 <link rel="stylesheet" href="../assets/css/contacto.csss">
 
 <div class="container-contacto d-flex justify-content-center align-items-center" style="min-height: 80vh;">
