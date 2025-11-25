@@ -1,0 +1,7 @@
+input.is-valid {
+    box-shadow: 0 0 6px green !important;
+}
+
+input.is-invalid {
+    box-shadow: 0 0 6px red !important;
+}
