@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!idCasa) return;
 
         try {
-            console.log("➡️ Cargando habitaciones para casa ID:", idCasa);
+            console.log("Cargando habitaciones para casa ID:", idCasa);
             const response = await fetch(`../controller/IncidenciaController.php?action=habitaciones&id_casa=${idCasa}`);
             const data = await response.json();
 
-            console.log("📦 Datos recibidos del backend:", data); //aquí veremos qué llega
+            console.log("Datos recibidos del backend:", data); //aquí veremos qué llega
 
             habitacionSelect.innerHTML = '<option value="" disabled selected>Selecciona una habitación</option>';
 
