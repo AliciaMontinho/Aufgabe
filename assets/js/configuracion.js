@@ -61,8 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     cbModoOscuro.addEventListener("change", () => {
-        localStorage.setItem("temaOscuro", cbModoOscuro.checked);
-        document.body.classList.toggle("dark-mode");
-    });
+    const activado = cbModoOscuro.checked;
+    localStorage.setItem("temaOscuro", activado);
+    document.body.classList.toggle("dark-mode", activado);
+    document.cookie = `modoOscuro=${activado}; path=/; max-age=${60 * 60 * 24 * 30}`;
+});
 
 });

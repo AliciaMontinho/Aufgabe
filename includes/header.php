@@ -10,13 +10,24 @@
 
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/header.css">
-    
+    <?php include_once '../includes/auth.php'; ?>
     <script>
-        // Aplicar modo oscuro antes de renderizar la página
+    (function () {
+        //lLeer cookie si existe
+        const cookieDark = document.cookie.split("; ").find(row => row.startsWith("modoOscuro="));
+        const cookieValue = cookieDark ? cookieDark.split("=")[1] : null;
+
+        //Si hay cookiesincronizamos con localStorage
+        if (cookieValue === "true") {
+            localStorage.setItem("temaOscuro", "true");
+        }
+
+        //Aplicar dark-mode si está activado
         if (localStorage.getItem("temaOscuro") === "true") {
             document.documentElement.classList.add("dark-mode");
         }
-    </script>
+    })();
+</script>
 </head>
 
 <body class="bg-light">
@@ -46,7 +57,7 @@
 
                         <ul class="dropdown-menu dropdown-menu-end shadow">
                             <li class="dropdown-header">
-                                <strong><?php echo $_SESSION['nombre'] ?? 'Usuario'; ?></strong><br>
+                                <strong><?php echo $_SESSION['nombre'] ?? 'Usuario'; echo $_SESSION['apellido'] ?? 'Apellido';  ?></strong><br>
                                 <small class="text-muted"><?php echo $_SESSION['rol'] ?? 'rol'; ?></small>
                             </li>
                             <li>
