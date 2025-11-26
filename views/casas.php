@@ -63,7 +63,6 @@ if ($idCasaSeleccionada) {
                             <th>Número</th>
                             <th>Descripción</th>
                             <th>Incidencias</th>
-                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,13 +71,6 @@ if ($idCasaSeleccionada) {
                                 <td><?= htmlspecialchars($h['numero']) ?></td>
                                 <td><?= htmlspecialchars($h['descripcion']) ?></td>
                                 <td><?= $h['total_incidencias'] ?></td>
-                                <td>
-                                    <!-- El botón ver incidencias nos redirige al historial de incidencias -->
-                                    <a href="historial.php?id_habitacion=<?= $h['id_habitacion'] ?>"
-                                        class="btn btn-sm btn-outline-primary">
-                                        Ver incidencias
-                                    </a>
-                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
