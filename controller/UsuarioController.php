@@ -24,6 +24,7 @@ class UsuarioController
             session_start();
             $_SESSION['usuario_id'] = $usuario['id_usuario'];
             $_SESSION['nombre'] = $usuario['nombre'];
+            $_SESSION['apellido'] = $usuario['apellido'];
             $_SESSION['rol'] = $usuario['rol'];
             $_SESSION['email'] = $usuario['email'];
 
