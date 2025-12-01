@@ -1,6 +1,11 @@
+/* ===========================
+   ESTILO GENERAL
+=========================== */
+
 .navbar {
     background-color: #0d6efd !important;
     height: 120px;
+    transition: all 0.3s ease;
 }
 
 .logo_general {
@@ -22,4 +27,49 @@
 
 .dropdown-item:hover {
     background-color: #eef4ff;
+}
+
+/*Responsive*/
+
+@media (max-width: 768px) {
+
+    /* Reducimos altura para móviles */
+    .navbar {
+        height: auto;
+        padding: 0.6rem 1rem;
+    }
+
+    .navbar-toggler {
+        border: none;
+        padding: 0.3rem;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    .navbar-toggler-icon {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    /* Menú desplegado más legible */
+    .navbar-nav {
+        gap: 6px;
+        padding-top: 0.5rem;
+    }
+
+    .nav-link {
+        font-size: 0.95rem;
+        padding: 6px 0;
+    }
+
+    /* Perfil (dropdown) */
+    .dropdown-menu {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+        min-width: 170px;
+    }
+
+    .dropdown-header {
+        font-size: 0.95rem;
+    }
 }

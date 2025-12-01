@@ -46,17 +46,6 @@ $totalCasas = $db->query("SELECT COUNT(*) FROM casas ")->fetchColumn();
     <div class="container">
         <div class="row g-4">
 
-            <div class="col-md-4">
-                <div class="card shadow-sm border-0 dashboard-card h-100">
-                    <div class="card-body text-center">
-                        <i class="bi bi-journal-text text-primary" style="font-size:3rem;"></i>
-                        <h4 class="mt-3 fw-semibold">Historial</h4>
-                        <p class="text-muted">Consulta el registro completo de incidencias.</p>
-                        <a href="historial.php" class="btn btn-primary w-100">Ver historial</a>
-                    </div>
-                </div>
-            </div>
-
             <?php if ($_SESSION['rol'] === 'trabajador'): ?>
                 <!--Lo que verán los trabajadores -->
                 <div class="col-md-4">
@@ -83,6 +72,18 @@ $totalCasas = $db->query("SELECT COUNT(*) FROM casas ")->fetchColumn();
                     </div>
                 </div>
             <?php endif; ?>
+            
+            
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 dashboard-card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-journal-text text-primary" style="font-size:3rem;"></i>
+                        <h4 class="mt-3 fw-semibold">Historial</h4>
+                        <p class="text-muted">Consulta el registro completo de incidencias.</p>
+                        <a href="historial.php" class="btn btn-primary w-100">Ver historial</a>
+                    </div>
+                </div>
+            </div>
 
             <div class="col-md-4">
                 <div class="card shadow-sm border-0 dashboard-card h-100">

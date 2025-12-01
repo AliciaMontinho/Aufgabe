@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.disabled = true; // inicio
     btn.style.opacity = "0.6";
 
+    
     const validaciones = {
         nombre: valor => valor.trim().length >= 3,
         email: valor => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor),

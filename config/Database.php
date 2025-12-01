@@ -1,10 +1,16 @@
 <?php
 //llevamos el proyecto a internet
 class Database {
-    private $host = "aufgabe.kesug.com";
+    // private $host = "aufgabe.kesug.com";
+    // private $dbname = "aufgabe_db";
+    // private $username = "if0_40542270";
+    // private $password = "PFinalODAW2";
+    // private $conn;
+
+    private $host = "localhost";
     private $dbname = "aufgabe_db";
-    private $username = "if0_40542270";
-    private $password = "PFinalODAW2";
+    private $username = "root";
+    private $password = ""; 
     private $conn;
 
     public function conectar() {

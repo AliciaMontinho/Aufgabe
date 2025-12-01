@@ -41,14 +41,14 @@ if (empty($historial)) {
 
 foreach ($historial as $h) {
     echo "
-        <tr>
-            <td>".htmlspecialchars($h['titulo'])."</td>
-            <td>".htmlspecialchars($h['casa'] ?? '—')."</td>
-            <td>".htmlspecialchars($h['habitacion'] ?? '—')."</td>
-            <td><span class='badge bg-success'>".htmlspecialchars($h['estado'])."</span></td>
-            <td>".htmlspecialchars($h['tecnico'] ?? '—')."</td>
-            <td>".date('Y-m-d H:i', strtotime($h['fecha_inicio']))."</td>
-            <td>".($h['fecha_fin'] ? date('Y-m-d H:i', strtotime($h['fecha_fin'])) : '—')."</td>
+         <tr>
+            <td data-label='Título'>".htmlspecialchars($h['titulo'])."</td>
+            <td data-label='Casa'>".htmlspecialchars($h['casa'] ?? '—')."</td>
+            <td data-label='Habitación'>".htmlspecialchars($h['habitacion'] ?? '—')."</td>
+            <td data-label='Estado'><span class='badge bg-success'>".htmlspecialchars($h['estado'])."</span></td>
+            <td data-label='Técnico'>".htmlspecialchars($h['tecnico'] ?? '—')."</td>
+            <td data-label='Fecha Inicio'>".date('Y-m-d H:i', strtotime($h['fecha_inicio']))."</td>
+            <td data-label='Fecha Fin'>".($h['fecha_fin'] ? date('Y-m-d H:i', strtotime($h['fecha_fin'])) : '—')."</td>
         </tr>
     ";
 }

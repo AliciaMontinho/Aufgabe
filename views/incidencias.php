@@ -101,7 +101,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </form>
     </div>
 
-    <div class="table-responsive">
+    <div class="table table-responsive tabla-incidencias">
         <table class="table table-hover tabla-incidencias align-middle shadow-sm">
             <thead class="table-primary">
                 <tr>

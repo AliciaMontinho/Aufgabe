@@ -106,7 +106,7 @@ $historial = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <!--tabla del historial -->
     <div class="table-responsive">
-        <table class="table table-hover tabla-historial shadow-sm align-middle">
+        <table class="table table-hover tabla-responsive tabla-historial shadow-sm align-middle">
             <thead class="table-primary">
                 <tr>
                     <th>Incidencia</th>

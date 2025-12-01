@@ -1,6 +1,3 @@
-
-
-<!-- Diseñada pero sin back todavía -->
 <?php
 session_start();
 
