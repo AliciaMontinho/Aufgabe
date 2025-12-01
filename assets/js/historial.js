@@ -32,8 +32,8 @@ function aplicarEfectosVisualesHistorial() {
     document.querySelectorAll(".badge").forEach(badge => {
         const texto = badge.textContent.toLowerCase();
 
-        if (texto.includes("completado"))  badge.style.background = "#2a9d8f"; // verde PRO 💚
-        if (texto.includes("en proceso"))  badge.style.background = "#ffdd57"; // amarillo
-        if (texto.includes("no atendido")) badge.style.background = "#6c757d"; // gris
+        if (texto.includes("completado"))  badge.style.background = "#2a9d8f"; 
+        if (texto.includes("en proceso"))  badge.style.background = "#ffdd57"; 
+        if (texto.includes("no atendido")) badge.style.background = "#6c757d"; 
     });
 }
