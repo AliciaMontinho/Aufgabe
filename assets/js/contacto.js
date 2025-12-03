@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", e => {
         e.preventDefault();
         if (verificarFormulario()) {
-            mostrarMensaje("Formulario validado correctamente.", "exito");
+            sendEmail();
             // Aquí podrías enviar el formulario con AJAX si tuvieras backend
             form.reset();
             btn.disabled = true;
@@ -78,3 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => div.remove(), 3500);
     }
 });
+
+
+//serviceID: aufgabe
+//templateID: template_55b4b5h
+//publicKey: XraosLltaJZxx3ZUR

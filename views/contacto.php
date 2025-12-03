@@ -7,7 +7,7 @@ if (isset($_SESSION['usuario_id'])) {
     include '../includes/header_login.php';
 }
 ?>
-<link rel="stylesheet" href="../assets/css/contacto.csss">
+<link rel="stylesheet" href="../assets/css/contacto.css">
 
 <div class="container-contacto d-flex justify-content-center align-items-center" style="min-height: 80vh;">
   <div class="card shadow p-4" style="width: 500px; border-radius: 20px;">
@@ -42,6 +42,8 @@ if (isset($_SESSION['usuario_id'])) {
     </p>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="../assets/js/contacto.js"></script>
+<script src="../assets/js/email.js"></script>
 
 <?php include_once '../includes/footer.php'; ?>
