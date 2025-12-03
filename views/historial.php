@@ -140,6 +140,56 @@ $historial = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </tbody>
         </table>
     </div>
+    
+    <!-- Acordeón que se visualizará en pantallas pequeñas (en este caso móvil) -->
+    <div class="accordion mobile-accordion" id="accordionTable">
+    <?php foreach ($historial as $h): ?>
+        <?php $id = $h['id_incidencia'] ?? $h['id'] ?? uniqid(); ?>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading-<?= $id ?>">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapse-<?= $id ?>" aria-expanded="false"
+                    aria-controls="collapse-<?= $id ?>">
+                    <strong><?= htmlspecialchars($h['titulo']) ?></strong>
+                </button>
+            </h2>
+
+            <div id="collapse-<?= $id ?>" class="accordion-collapse collapse"
+                 aria-labelledby="heading-<?= $id ?>" data-bs-parent="#accordionTable">
+
+                <div class="accordion-body">
+
+                    <p><strong>Casa:</strong> <?= htmlspecialchars($h['casa'] ?? '—') ?></p>
+
+                    <p><strong>Habitación:</strong> <?= htmlspecialchars($h['habitacion'] ?? '—') ?></p>
+
+                    <p>
+                        <strong>Estado:</strong>
+                        <span class="badge bg-success">
+                            <?= htmlspecialchars($h['estado']) ?>
+                        </span>
+                    </p>
+
+                    <p><strong>Técnico:</strong> <?= htmlspecialchars($h['tecnico'] ?? '—') ?></p>
+
+                    <p><strong>Fecha inicio:</strong>
+                        <?= date('Y-m-d H:i', strtotime($h['fecha_inicio'])) ?>
+                    </p>
+
+                    <p><strong>Fecha fin:</strong>
+                        <?= $h['fecha_fin']
+                                ? date('Y-m-d H:i', strtotime($h['fecha_fin']))
+                                : '—'
+                        ?>
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
 </div>
 
 <script src="../assets/js/historial.js"></script>

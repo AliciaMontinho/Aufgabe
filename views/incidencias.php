@@ -55,9 +55,11 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h2 class="text-primary fw-bold">
             <i class="bi bi-exclamation-octagon-fill me-2"></i> Incidencias
         </h2>
-        <a href="nueva_incidencia.php" class="btn btn-nueva-incidencia">
-            <i class="bi bi-plus-circle me-1"></i> Nueva incidencia
-        </a>
+        <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'trabajador'): ?>
+            <a href="nueva_incidencia.php" class="btn btn-nueva-incidencia">
+                <i class="bi bi-plus-circle me-1"></i> Nueva incidencia
+            </a>
+        <?php endif; ?>
     </div>
 
     <div class="card shadow-sm p-4 mb-4 filtro-incidencias">
@@ -178,14 +180,73 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </tbody>
         </table>
     </div>
+
+    <!-- Acordeón que se visualizará en pantallas pequeñas (en este caso móvil) -->
+    <div class="accordion mobile-accordion" id="accordionTable">
+        <?php foreach ($incidencias as $i): ?>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-<?= $i['id_incidencia'] ?>">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse-<?= $i['id_incidencia'] ?>" aria-expanded="false" aria-controls="collapse-<?= $i['id_incidencia'] ?>">
+                        <strong><?= htmlspecialchars($i['titulo']) ?></strong>
+                    </button>
+                </h2>
+                <div id="collapse-<?= $i['id_incidencia'] ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?= $i['id_incidencia'] ?>" data-bs-parent="#accordionTable">
+                    <div class="accordion-body">
+                        <p><strong>Casa:</strong> <?= htmlspecialchars($i['casa_nombre'] ?? 'Sin casa') ?></p>
+                        <p><strong>Habitación:</strong> <?= htmlspecialchars($i['habitacion_numero'] ?? '—') ?></p>
+
+                        <p>
+                            <strong>Relevancia:</strong>
+                            <?php
+                                $badgeClass = match ($i['relevancia']) {
+                                    'alto' => 'bg-danger',
+                                    'medio' => 'bg-warning text-dark',
+                                    'bajo' => 'bg-success',
+                                    default => 'bg-secondary'
+                                };
+                            ?>
+                            <span class="badge <?= $badgeClass ?>"><?= ucfirst($i['relevancia'] ?? '—') ?></span>
+                        </p>
+
+                        <p>
+                            <strong>Estado:</strong>
+                            <?php
+                                $estadoClass = match ($i['estado']) {
+                                    'no_atendido' => 'bg-secondary',
+                                    'en_proceso' => 'bg-warning text-dark',
+                                    'completado' => 'bg-success',
+                                    default => 'bg-light text-dark'
+                                };
+                            ?>
+                            <span class="badge <?= $estadoClass ?>"><?= str_replace('_', ' ', ucfirst($i['estado'])) ?></span>
+                        </p>
+
+                        <p><strong>Fecha inicio:</strong> <?= date('Y-m-d', strtotime($i['fecha_inicio'])) ?></p>
+
+                        <div class="d-flex gap-2">
+                            <a href="detalle_incidencia.php?id=<?= $i['id_incidencia'] ?>" class="btn btn-sm btn-info text-white me-1">
+                                <i class="bi bi-eye"></i> Ver
+                            </a>
+                            <?php if ($_SESSION['rol'] === 'tecnico'): ?>
+                                <a href="editar_incidencia.php?id=<?= $i['id_incidencia'] ?>" class="btn btn-sm btn-warning text-white">
+                                    <i class="bi bi-pencil"></i> Editar
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </div>
 
 <?php if (isset($_GET['exito']) && $_GET['exito'] == 1): ?>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        mostrarToast("Incidencia creada correctamente", "success");
-    });
-</script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            mostrarToast("Incidencia creada correctamente", "success");
+        });
+    </script>
 <?php endif; ?>
 
 <?php if (isset($_GET['actualizado']) && $_GET['actualizado'] == 1): ?>

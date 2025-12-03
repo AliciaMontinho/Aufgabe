@@ -1,3 +1,22 @@
+/* responsive */
+.tabla-historial {
+    display: table;
+
+    @media (max-width: 576px) {
+        display: none;
+    }
+
+}
+
+.mobile-accordion {
+    display: none;
+
+    @media (max-width: 576px) {
+        display: block;
+    }
+}
+/* fin responsive */
+
 .historial-container {
     max-width: 1100px;
 }

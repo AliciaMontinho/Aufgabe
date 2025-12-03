@@ -1,5 +1,24 @@
-.incidencias-container{
-     max-width: 1100px;
+/* Responsive */
+.tabla-incidencias {
+    display: table;
+
+    @media (max-width: 576px) {
+        display: none;
+    }
+
+}
+
+.mobile-accordion {
+    display: none;
+
+    @media (max-width: 576px) {
+        display: block;
+    }
+}
+/* fin responsive */
+
+.incidencias-container {
+    max-width: 1100px;
 }
 
 .filtro-incidencias {
@@ -16,12 +35,13 @@
     background-color: #d9e5ff !important;
     color: white;
 }
-.contenedor-boton .btn-nueva-incidencia{
-display: flex;
-justify-content: right;
-flex-direction: row;
-color: #0d6efd;
-font-weight: bold;
+
+.contenedor-boton .btn-nueva-incidencia {
+    display: flex;
+    justify-content: right;
+    flex-direction: row;
+    color: #0d6efd;
+    font-weight: bold;
 }
 
 
@@ -51,7 +71,7 @@ font-weight: bold;
     display: flex;
     gap: 10px;
     align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     font-size: 15px;
     transition: right 0.4s ease, opacity 0.4s ease;
     opacity: 0;
