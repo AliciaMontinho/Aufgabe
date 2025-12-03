@@ -14,12 +14,15 @@ $filtroRelevancia = $_GET['relevancia'] ?? '';
 $sql = "
     SELECT i.id_incidencia, i.titulo, i.relevancia, i.estado, i.fecha_inicio,
            h.numero AS habitacion_numero,
+           u.nombre AS creador_nombre,
            c.nombre AS casa_nombre
     FROM incidencias i
     LEFT JOIN habitaciones h ON i.id_habitacion = h.id_habitacion
     LEFT JOIN casas c ON h.id_casa = c.id_casa
+    LEFT JOIN usuarios u ON i.id_creador = u.id_usuario
     WHERE i.estado != 'completado'
 ";
+
 
 $parametros = [];
 if ($filtroCasa !== '') {
@@ -107,13 +110,13 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <table class="table table-hover tabla-incidencias align-middle shadow-sm">
             <thead class="table-primary">
                 <tr>
-                    <th>ID</th>
                     <th>Título</th>
                     <th>Casa</th>
                     <th>Habitación</th>
                     <th>Relevancia</th>
                     <th>Estado</th>
                     <th>Fecha inicio</th>
+                    <th>Creador</th>
                     <th class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -128,7 +131,6 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php else: ?>
                     <?php foreach ($incidencias as $i): ?>
                         <tr>
-                            <td><?= $i['id_incidencia'] ?></td>
                             <td><?= htmlspecialchars($i['titulo']) ?></td>
                             <td><?= $i['casa_nombre'] ?? 'Sin casa' ?></td>
                             <td><?= $i['habitacion_numero'] ?? '—' ?></td>
@@ -162,6 +164,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </td>
 
                             <td><?= date('Y-m-d', strtotime($i['fecha_inicio'])) ?></td>
+                            <td><?= htmlspecialchars($i['creador_nombre']) ?></td>
 
                             <td class="text-center">
                                 <a href="detalle_incidencia.php?id=<?= $i['id_incidencia'] ?>" class="btn btn-sm btn-info text-white me-1">
