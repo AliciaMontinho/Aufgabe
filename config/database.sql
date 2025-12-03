@@ -57,12 +57,13 @@ INSERT INTO casas (nombre, direccion, telefono) VALUES
 ('Seeheim', 'Bahnhofstrasse 78, Zürich', '+41 44 654 3210');
 
 INSERT INTO usuarios (nombre, apellido, email, password, rol) VALUES
-('Anna', 'Müller', 'anna.muller@aufgabe.ch', '1234', 'trabajador'),
-('Markus', 'Steiner', 'markus.steiner@aufgabe.ch', '1234', 'trabajador'),
-('Jonas', 'Keller', 'jonas.keller@aufgabe.ch', '1234', 'tecnico'),
-('Lena', 'Schmidt', 'lena.schmidt@aufgabe.ch', '1234', 'tecnico'),
+('Eva', 'Naveira', 'evanaveira@gmail.com', '1234', 'trabajador'),
+('Fernando', 'Prado', 'fernandop`rado@gmail.com', '1234', 'trabajador'),
+('Víctor', 'Pascual', 'victorpascual@gmail.com', '1234', 'tecnico'),
+('Tino', 'García', 'tinogarcía@gmail.com', '1234', 'tecnico'),
 ('Alicia', 'Montinho','aliciamontinho@gmail.com', '1234', 'trabajador'),
-('Artur', 'Montinho','martinsart@gmail.com', '1234', 'tecnico');
+('Artur', 'Montinho','martinsart@gmail.com', '1234', 'tecnico'),
+('Marta', 'Iglesias','martaiglesias@gmail.com', '1234', 'trabajador');
 
 INSERT INTO habitaciones (numero, id_casa, descripcion) VALUES
 ('Sala de enfermeros', 1, 'Sala equipada para el personal de enfermería'),

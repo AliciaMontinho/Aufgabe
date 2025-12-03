@@ -1,10 +1,11 @@
 <?php
 //llevamos el proyecto a internet
+// https://aufgabepf.wuaze.com/Aufgabe/views/login.php
 class Database {
-    // private $host = "aufgabe.kesug.com";
-    // private $dbname = "aufgabe_db";
-    // private $username = "if0_40542270";
-    // private $password = "PFinalODAW2";
+    // private $host = "sql100.infinityfree.com";
+    // private $dbname = "if0_40574917_aufgabe_db";
+    // private $username = "if0_40574917";
+    // private $password = "FWhG3PJ8lK1";
     // private $conn;
 
     private $host = "localhost";
@@ -23,6 +24,7 @@ class Database {
             );
             //Excepción para controlar errores si es que la conexión falla
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo "Conexión exitosa a la base de datos.";
         } catch (PDOException $e) {
             echo "Error de conexión: " . $e->getMessage();
         }
