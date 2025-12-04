@@ -15,33 +15,41 @@ class UsuarioController
         $this->usuarioModel = new Usuario($this->db);
     }
 
-    // Procesar login
+    //Procesar login
+    //mejoras para validación de login
     public function login($email, $password)
-    {
-        $usuario = $this->usuarioModel->verificarUsuario($email, $password);
+{
+    $resultado = $this->usuarioModel->verificarUsuario($email, $password);
 
-        if ($usuario) {
-            session_start();
-            $_SESSION['usuario_id'] = $usuario['id_usuario'];
-            $_SESSION['nombre'] = $usuario['nombre'];
-            $_SESSION['apellido'] = $usuario['apellido'];
-            $_SESSION['rol'] = $usuario['rol'];
-            $_SESSION['email'] = $usuario['email'];
+    if (is_array($resultado)) {
+        //LOGIN OK
+        session_start();
+        $_SESSION['usuario_id'] = $resultado['id_usuario'];
+        $_SESSION['nombre'] = $resultado['nombre'];
+        $_SESSION['apellido'] = $resultado['apellido'];
+        $_SESSION['rol'] = $resultado['rol'];
+        $_SESSION['email'] = $resultado['email'];
 
-            //Guardar datos
-            if (!empty($_POST['recuerdame'])) {
-                setcookie("usuario_email", $email, time() + (86400 * 30), "/");
-            } else {
-                setcookie("usuario_email", "", time() - 3600, "/");
-            }
-
-            header("Location: ../views/dashboard.php");
-            exit;
+        if (!empty($_POST['recuerdame'])) {
+            setcookie("usuario_email", $email, time() + (86400 * 30), "/");
         } else {
-            header("Location: ../views/login.php?error=1");
-            exit;
+            setcookie("usuario_email", "", time() - 3600, "/");
         }
+
+        header("Location: ../views/dashboard.php");
+        exit;
     }
+
+    if ($resultado === "email") {
+        header("Location: ../views/login.php?error=email");
+        exit;
+    }
+
+    if ($resultado === "password") {
+        header("Location: ../views/login.php?error=password");
+        exit;
+    }
+}
 
 
      public function cambiarPassword()

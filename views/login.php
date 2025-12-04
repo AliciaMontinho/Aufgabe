@@ -1,6 +1,7 @@
 <!-- En funcionamiento -->
 <?php include_once '../includes/header_login.php'; ?>
 <link rel="stylesheet" href="../assets/css/login.css">
+<link rel="stylesheet" href="validacion_login.css">
 
 <div class="contenedor ">
     <div class="card card-login shadow-lg p-5">
@@ -37,6 +38,6 @@
     </div>
 </div>
 
-<link rel="stylesheet" href="validacion_login.css">
+
 <script src="../assets/js/validacion_login.js"></script>
 <?php include_once '../includes/footer.php'; ?>

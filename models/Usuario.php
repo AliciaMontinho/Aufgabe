@@ -26,30 +26,32 @@ class Usuario {
         $stmt->execute();
     }
 
-  
+  //mejoras para validación de login
     public function verificarUsuario($email, $password) {
-        $usuario = $this->obtenerPorEmail($email);
+    $usuario = $this->obtenerPorEmail($email);
 
-        if (!$usuario) return false;
-
-        $passBD = $usuario['password'];
-
-        if (!password_get_info($passBD)['algo']) {
-            if ($password === $passBD) {
-                $nuevoHash = password_hash($password, PASSWORD_DEFAULT);
-                $this->actualizarPasswordHash($email, $nuevoHash);  
-                return $usuario;
-            } else {
-                return false; 
-            }
-        }
-
-        if (password_verify($password, $passBD)) {
-            return $usuario;
-        }
-
-        return false;
+    if (!$usuario) {
+        return "email"; //email no encontrado
     }
+
+    $passBD = $usuario['password'];
+
+    if (!password_get_info($passBD)['algo']) {
+        if ($password === $passBD) {
+            $nuevoHash = password_hash($password, PASSWORD_DEFAULT);
+            $this->actualizarPasswordHash($email, $nuevoHash);
+            return $usuario; //login OK
+        } else {
+            return "password"; //contraseña incorrecta
+        }
+    }
+
+    if (password_verify($password, $passBD)) {
+        return $usuario; //login OK
+    }
+
+    return "password"; //contraseña incorrecta
+}
 
     public function cambiarPassword($email, $nuevaPassword) {
         $nuevoHash = password_hash($nuevaPassword, PASSWORD_DEFAULT);
