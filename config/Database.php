@@ -8,6 +8,7 @@ class Database {
     // private $password = "FWhG3PJ8lK1";
     // private $conn;
 
+    // LOCALHOST
     private $host = "localhost";
     private $dbname = "aufgabe_db";
     private $username = "root";

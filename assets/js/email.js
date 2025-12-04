@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     
     // Inicializar EmailJS
-    emailjs.init("XraosLltaJZxx3ZUR"); // <-- tu publicKey
+    emailjs.init("XraosLltaJZxx3ZUR"); 
 
 });
 
-// Esta función será llamada desde contacto.js
+//Esta función será llamada desde contacto.js
 function sendEmail() {
 
     const params = {
@@ -26,7 +26,7 @@ function sendEmail() {
 }
 
 
-// Mensaje flotante compatible con CSS
+//Mensaje flotante compatible con CSS
 function mostrarMensajeFlotante(texto, tipo) {
     const div = document.createElement("div");
     div.textContent = texto;
