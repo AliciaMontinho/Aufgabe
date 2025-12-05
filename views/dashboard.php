@@ -36,8 +36,7 @@ $totalCasas = $db->query("SELECT COUNT(*) FROM casas ")->fetchColumn();
 
         <p class="text-muted fs-5">
             Tu rol es: <?= $_SESSION['rol'] ?>.
-            <!-- Recordamos el rol ya que el rol va a hacer que los permisos en la app sean diferentes
-            para el técnico y el trabajador, lo implementaré para la próxima entrega -->
+            
         </p>
     </div>
 
