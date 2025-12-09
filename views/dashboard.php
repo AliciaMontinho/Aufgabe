@@ -14,7 +14,7 @@ $database = new Database();
 $db = $database->conectar();
 
 // Consultas que uso para recoger datos de la  base y los situo en el epartado de resumen
-$totalUrgentes = $db->query("SELECT COUNT(*) FROM incidencias WHERE relevancia = 'alto'")->fetchColumn();
+$totalUrgentes = $db->query("SELECT COUNT(*) FROM incidencias WHERE relevancia = 'alto' AND estado != 'completado'")->fetchColumn();
 $totalProceso = $db->query("SELECT COUNT(*) FROM incidencias WHERE estado = 'en_proceso'")->fetchColumn();
 $totalNoAtendidas = $db->query("SELECT COUNT(*) FROM incidencias WHERE estado = 'no_atendido'")->fetchColumn();
 $totalCompletadas = $db->query("SELECT COUNT(*) FROM incidencias WHERE estado = 'completado'")->fetchColumn();
